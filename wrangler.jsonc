@@ -1,0 +1,27 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "deployment",
+  "main": "worker/index.js",
+  "compatibility_date": "2026-08-20",
+  "containers": [
+    {
+      "class_name": "FlaskContainer",
+      "image": "./Dockerfile",
+      "max_instances": 1
+    }
+  ],
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "FLASK_CONTAINER",
+        "class_name": "FlaskContainer"
+      }
+    ]
+  },
+  "migrations": [
+    {
+      "tag": "v1",
+      "new_sqlite_classes": ["FlaskContainer"]
+    }
+  ]
+}
